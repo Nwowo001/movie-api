@@ -3,11 +3,17 @@ import axios from "axios";
 import MovieCard from "./Components/MovieCard";
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faHouse } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowUp,
+  faHouse,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const fetchMovies = async (searchTerm = "") => {
     const type = searchTerm ? "search/movie" : "discover/movie";
@@ -38,8 +44,17 @@ function App() {
       }
     };
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const searchMovies = (e) => {
@@ -71,20 +86,24 @@ function App() {
         <form onSubmit={searchMovies}>
           <input
             type="text"
-            placeholder="Search for a movie"
+            placeholder="Search movies..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button type="submit">Search</button>
+          {isMobile ? (
+            <span className="search-icon" onClick={searchMovies}>
+              <FontAwesomeIcon icon={faSearch} />
+            </span>
+          ) : (
+            <button type="submit">Search</button>
+          )}
         </form>
       </header>
-
       <div className="container">{renderMovies()}</div>
-
       {showScrollTop && (
-        <div className="scroll-top-icon" onClick={handleScrollTop}>
+        <span className="scroll-top-icon" onClick={handleScrollTop}>
           <FontAwesomeIcon icon={faArrowUp} />
-        </div>
+        </span>
       )}
     </div>
   );
