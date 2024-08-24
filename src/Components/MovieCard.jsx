@@ -1,6 +1,8 @@
 import { React, useState } from "react";
 import axios from "axios";
 import { AiOutlineDownload } from "react-icons/ai";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const MovieCard = ({ movie }) => {
   const [trailerKey, setTrailerKey] = useState(null);
@@ -68,7 +70,7 @@ const MovieCard = ({ movie }) => {
             }}
           >
             <span className="close-button" onClick={closeOverlay}>
-              &times;
+              <FontAwesomeIcon icon={faClose} />
             </span>
             <h3>{movie.original_title}</h3>
             <p>{movie.overview}</p>
