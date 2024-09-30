@@ -147,7 +147,7 @@ body {
   justify-content: center;
   z-index: 1000;
   padding: 20px;
-  overflow-y: auto; /* Add scrolling if content overflows */
+  overflow-y: auto;
 }
 
 .overlay-content {
@@ -189,7 +189,7 @@ body {
   color: whitesmoke;
   font-size: 24px;
   transition: color 0.3s ease;
-  margin-left: 20px; /* Ensure spacing between close button and download icon */
+  margin-left: 20px;
 }
 
 .download-icon:hover {
@@ -286,7 +286,7 @@ body {
   }
 
   .download-icon {
-    font-size: 30px; /* Smaller icon size for better visibility */
+    font-size: 30px;
     top: 5px;
   }
   .close-button {
@@ -311,7 +311,7 @@ body {
 
   .close-button,
   .download-icon {
-    font-size: 18px; /* Further reduced size */
+    font-size: 18px;
     top: 5px;
   }
 }
